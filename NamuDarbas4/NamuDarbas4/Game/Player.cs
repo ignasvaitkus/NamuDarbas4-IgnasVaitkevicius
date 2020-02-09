@@ -6,19 +6,24 @@ namespace NamuDarbas4.Game
 {
     class Player
     {
-        static private int DiceId = 1;
+        static private int DiceId = 0;
         public int Id{get;}
         public int Number { get; set; }
 
-        public Player(int id, int number)
+        public int Dices { get; set; }
+
+        public Player(int id,int dices)
         {
+            Dices = dices;
             Id = id;
-            Number = number;
+           
             Id = DiceId++;
         }
         public override string ToString()
         {
-            return $"Student {Id}: {Number} ";
+            return $"Player {Id}: Has {Dices} dices ";
         }
+
+        
     }
 }
