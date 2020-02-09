@@ -8,12 +8,12 @@ namespace NamuDarbas4
         
         static void Main(string[] args)
         {
-            DiceGame game = new DiceGame(1,1);
+            DiceGame game = new DiceGame(1,1,0);
             game.InitGame();
 
-            
 
-           
+
+            
         }
     }
 }
