@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace NamuDarbas4.Gui
+{
+    sealed class GameWindow : Window
+    {
+        private Button _startButton;
+        
+        private Button _quitButton;
+        private TextBlock _titleTextBlock;
+
+
+        public GameWindow() : base(0, 0, 120, 30, '%')
+        {
+            _titleTextBlock = new TextBlock(10, 5, 100, new List<String> { });
+
+            _startButton = new Button(20, 13, 18, 5, "Start");
+            
+
+            
+
+            _quitButton = new Button(80, 13, 18, 5, "Quit");
+        }
+
+        public override void Render()
+        {
+            base.Render();
+
+            _titleTextBlock.Render();
+
+            _startButton.Render();
+            
+            _quitButton.Render();
+
+            Console.SetCursorPosition(0, 0);
+        }
+    }
+}

@@ -1,4 +1,5 @@
 ﻿using NamuDarbas4.Game;
+using NamuDarbas4.Gui;
 using System;
 
 namespace NamuDarbas4
@@ -8,8 +9,11 @@ namespace NamuDarbas4
         
         static void Main(string[] args)
         {
-            DiceGame game = new DiceGame(1,1,0);
-            game.InitGame();
+            MenuController menu = new MenuController();
+            menu.Controller();
+
+           // DiceGame game = new DiceGame(1,1,0);
+           // game.InitGame();
 
 
 

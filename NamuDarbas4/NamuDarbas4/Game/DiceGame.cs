@@ -21,11 +21,11 @@ namespace NamuDarbas4.Game
         }
         public List<Player> player = new List<Player>();
 
-        DiceRoller diceRoller = new DiceRoller();
-        int rollerCount;
+       
+       
         public void InitGame()
         {
-             rollerCount = diceRoller.DiceCount();
+            int rollerCount = 0;
             Random rnd = new Random();
             int players = rnd.Next(2,7);
             
