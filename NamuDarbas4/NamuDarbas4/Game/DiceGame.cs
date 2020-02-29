@@ -1,69 +1,79 @@
-﻿using System;
+﻿using NamuDarbas4.Gui;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace NamuDarbas4.Game
 {
-    class DiceGame:Player
+    class DiceGame
     {
-        
+        public static int GamesCount = 1;
         int id;
         int number;
         int dices;
         int score;
-        public DiceGame(int id,int dices, int score):base(id,dices,score)
-        {
-            this.id = id;
-            this.number = number;
-            this.dices = dices;
-            this.score = score;
-        }
-        public List<Player> player = new List<Player>();
+        
+        static int Sum = 0;
+       public static List<Player> player = new List<Player>();
 
        
        
-        public void InitGame()
+        public int InitGame(int dice, int players)
         {
-            int rollerCount = 0;
-            Random rnd = new Random();
-            int players = rnd.Next(2,7);
+            
+            Console.WriteLine("Match nr." + GamesCount);
+            Random rnd = new Random();          
             
             for (int i = 1; i<=players; i++)
             {
                 int playerScore = 0;
-                for (int y = 1; y <= rollerCount; y++)
+                for (int y = 1; y <= dice; y++)
                       {
                           playerScore += rnd.Next(1, 6);
                       }
-                    player.Add(new Player(id=id,dices= rollerCount,score=playerScore));
                 
-
-               // player.Where(p => p.score = 0).FirstOrDefault().score = playerScore;
+                    player.Add(new Player(id=i, dices=dice, score=playerScore));
+                Console.WriteLine(player[i-1]);
+                
             }
-
-            foreach (object group in player)
-            {
-                Console.WriteLine(group);
-            }
+            
             Console.WriteLine("-------------");
+            
+            int key = 0;            
+           int maxScore = 0;
+            
+           for (int i = 0; i <= players-1; i++)
+           {
+                if (player[i].Score > maxScore)
+                {
+                    maxScore = player[i].Score;
+                                      
+                       MenuController.Winner = player[i].ToString();
+                    
+                  
+                }
+           }
+           
+           for (int i = 0; i <= players-1; i++)
+           {
+               if (player[i].Score == maxScore) key++;
+               if(key==2)
+               {                       
+                           player.Clear();
+                    Player.DiceId = 1;
+                    GamesCount++;
+                   break;
+               }
+           }
+            
+           Sum = maxScore;
+            
+            
+            return key;
             
         }
 
-        public void Game()
-        {
-            Random rnd = new Random();
-           
-
-            // foreach (object group in player)
-            // {
-            //     for(int i=1; i<=rollerCount; i++)
-            //     {
-            //         playerScore += rnd.Next(1, 6);
-            //     }
-            //     
-            // }
-
-        }
+        
     }
 }

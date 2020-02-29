@@ -6,10 +6,10 @@ namespace NamuDarbas4.Game
 {
     class DiceRoller
     {
-        public int diceCount { get; private set; } = 3;
-        public int DRKey { get; private set; } = 0;
+        public int diceCount = 3;
+        public static int DRKey { get; set; } = 0;
 
-        public void DiceAmount()
+        public int DiceAmount()
         {          
             ConsoleKeyInfo pressedChar = Console.ReadKey(true);
 
@@ -23,16 +23,21 @@ namespace NamuDarbas4.Game
                     if (diceCount != 1) diceCount--;
                     break;
 
-                case ConsoleKey.Enter:
-                    DRKey = 1;
+                case ConsoleKey.Enter:                    
+                    DRKey = 1;                    
                     break;
 
                 case ConsoleKey.Escape:
                     DRKey = 2;
                     break;
             }
+            return diceCount;
 
+        }
 
+        public int GetDices()
+        {
+            return diceCount;
         }
     }
 

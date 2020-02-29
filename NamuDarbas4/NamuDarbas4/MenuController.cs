@@ -8,54 +8,109 @@ namespace NamuDarbas4
 {
     class MenuController
     {
-        GameWindow gameWindow = new GameWindow();
+        MenuWindow menuWindow = new MenuWindow();
         PlayerWindow playerWindow = new PlayerWindow();
         DiceWindow diceWindow = new DiceWindow();
-        DiceRoller dice = new DiceRoller();
+        DiceRoller diceRoller = new DiceRoller();
+        DiceGame diceGame = new DiceGame();
+
+
+        public static string Winner = "No Winner";
 
         public void Controller()
         {
+            int controller = 0;
+            int playerW = 0;
             int x = 0;
-            gameWindow.Render();
-            while (x == 0)
-            {                
-                ConsoleKeyInfo pressedChar = Console.ReadKey(true);
+            playerWindow.PWKey = 0;
+            while (controller == 0 || controller==1)
+            {
+                 playerW = 0;
+                 x = 0;
+                DiceRoller.DRKey = 0;
 
-                switch (pressedChar.Key)
+                if (controller == 1) x = 2;
+                while (DiceRoller.DRKey == 0)
                 {
-                    case ConsoleKey.Q:
-                        x = 1;
-                        break;
-                    case ConsoleKey.P:
-                        x = 2;
-                        break;                  
+
+                    DiceRoller.DRKey = 0;
+                while (playerW == 0)
+                {
+                    playerWindow.PWKey = 0;
+                    playerW = 0;
+                    menuWindow.Render();
+                    while (x == 0)
+                    {
+                        ConsoleKeyInfo pressedChar = Console.ReadKey(true);
+
+                        switch (pressedChar.Key)
+                        {
+                            case ConsoleKey.Q:
+                                x = 1;
+                                break;
+                            case ConsoleKey.P:
+                                x = 2;
+                                break;
+                        }
+                    }
+
+                    if (x == 1)
+                    {
+                        Console.Clear();
+                        return;
+                    }
+
+                    else if (x != 2) throw new System.Exception("Klaida, kas per mygtukas?");
+
+
+
+                    playerWindow.Render();
+
+                    if (playerWindow.PWKey == 1) break;
+                    else if (playerWindow.PWKey == 2) ;
+                    else throw new System.Exception("Klaida zaideju kiekio lenteleje?");
                 }
-            }
 
-            if (x == 1)
-            {
-                Console.Clear();
-                return;
-
-            }
-            else if( x==2 )
-            {                
-                playerWindow.Render();
-            }
-            else throw new System.Exception("Klaida, kas per mygtukas?");
-
-            if (playerWindow.PWKey == 1)
-            {
                 playerWindow.PlayerCount();
-                
-            }
-            else if (playerWindow.PWKey == 2) Controller();
-            else throw new System.Exception("Klaida zaideju kiekio lenteleje?");
 
-            diceWindow.Render();
-            if (dice.DRKey == 1) ;
-            else if (dice.DRKey == 2) Controller();
-            else throw new System.Exception("Klaida kauliuku kiekio WIndow?");
+                diceWindow.Render();
+
+                if (DiceRoller.DRKey == 1) Console.Clear();
+                else if (DiceRoller.DRKey == 2)
+                {
+                        DiceRoller.DRKey = 0;
+                }
+                else throw new System.Exception("Klaida kauliuku kiekio Window?");
+            }
+
+                while (diceGame.InitGame(diceWindow.Dices, playerWindow.PlayerCount()) == 2) ;
+                Console.ReadKey();
+
+                GameOverWindow gameOverWindow = new GameOverWindow(Winner);
+                gameOverWindow.Render();
+
+                if (GameOverWindow.GOWKey == 1)
+                {
+                    Console.Clear();
+                    return;
+                }
+                else if (GameOverWindow.GOWKey == 2)
+                {
+                    controller = 1;
+                    diceWindow.Dices = 0;
+                    DiceGame.player.Clear();
+                }
+                else if (GameOverWindow.GOWKey == 3)
+                {
+                    controller = 0;
+                    diceWindow.Dices = 0;
+                    DiceGame.player.Clear();
+                }
+
+
+                
+
+            }
         }
     }
 }

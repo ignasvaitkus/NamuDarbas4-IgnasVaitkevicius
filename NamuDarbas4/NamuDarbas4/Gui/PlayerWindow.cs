@@ -7,7 +7,6 @@ namespace NamuDarbas4.Gui
     sealed class PlayerWindow : Window
     {
         public int PlayerAmount { get; private set; } = 0;
-        GameWindow gameWindow = new GameWindow();
         DiceWindow diceWindow=new DiceWindow();
         Button button;
         private Button P2;
@@ -16,7 +15,7 @@ namespace NamuDarbas4.Gui
         private Button P5;
         private Button P6;
         private Button P7;
-        public int PWKey { get; private set; } = 0;
+        public int PWKey { get; set; } = 0;
 
         public PlayerWindow() : base(0, 0, 120, 30, '%')
         {

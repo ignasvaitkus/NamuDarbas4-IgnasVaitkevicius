@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NamuDarbas4.Gui
 {
-    sealed class GameWindow : Window
+    sealed class MenuWindow : Window
     {
         private Button _startButton;
         
@@ -12,7 +12,7 @@ namespace NamuDarbas4.Gui
         private TextBlock _titleTextBlock;
 
 
-        public GameWindow() : base(0, 0, 120, 30, '%')
+        public MenuWindow() : base(0, 0, 120, 30, '%')
         {
             _titleTextBlock = new TextBlock(10, 5, 100, new List<String> { });
 
