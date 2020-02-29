@@ -41,25 +41,30 @@ namespace NamuDarbas4.Gui
             _winnerButton.Render();
             _quitButton.Render();
 
-            ConsoleKeyInfo pressedChar = Console.ReadKey(true);
-            switch (pressedChar.Key)
+            
+            int x = 0;
+            while (x == 0)
             {
-                case ConsoleKey.Q:
-                    GOWKey= 1;
-                    break;
+                ConsoleKeyInfo pressedChar = Console.ReadKey(true);
+                switch (pressedChar.Key)
+                {
+                    case ConsoleKey.Q:
+                        GOWKey = 1;
+                        x = 1;
+                        break;
 
-                case ConsoleKey.R:
-                    Console.Clear();
-                    GOWKey= 2;
-                    break;
-                case ConsoleKey.M:
-                    Console.Clear();
-                    GOWKey = 3;
-                    break;
+                    case ConsoleKey.R:
+                        Console.Clear();
+                        GOWKey = 2;
+                        x = 1;
+                        break;
+                    case ConsoleKey.M:
+                        Console.Clear();
+                        GOWKey = 3;
+                        x = 1;
+                        break;
 
-                default: GOWKey = 0 ;
-                    break;
-                    
+                }
             }
         }
 
